@@ -10,7 +10,8 @@
     "requirejs": "latest",
     "jquery": "latest",
     "backbone-amd": "latest",
-    "underscore-amd": "latest"
+		"lodash": "latest",
+		"bootstrap": "latest"
 	},
   "private": true,
   "ignore": [
