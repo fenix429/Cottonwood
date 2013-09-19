@@ -1,0 +1,24 @@
+{
+  "name": "Cottonwood",
+  "version": "0.0.1",
+  "authors": [
+    "fenix429 <fenix429@gmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+	"dependencies": {
+    "requirejs": "latest",
+    "jquery": "latest",
+    "backbone-amd": "latest",
+    "underscore-amd": "latest"
+	},
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+		"components",
+    "test",
+    "tests"
+  ]
+}
