@@ -1,0 +1,32 @@
+
+<div id="templates">
+	
+	<script id="articleCollectionView" type="text/html">
+		{{#articles}}
+			<article data-article-id="{{id}}">
+				<a href="{{url}}" class="title">{{title}}</a>
+				<p>{{text}}</p>
+			</article>
+		{{else}}
+			<strong>No Articles Found.</strong>
+		{{/articles}}
+	</script>
+	
+	<script id="feedCollectionView" type="text/html">
+		{{#if feeds}}
+			<div class="list-group">
+				<a href="#/" data-feed-id="0" class="list-group-item">All</a>
+			{{#each feeds}}
+				<a href="#/feed/{{id}}" data-feed-id="{{id}}" class="list-group-item">{{title}}</a>
+			{{/each}}
+			</div>
+		{{else}}
+			<p>You have no feeds setup.</p>
+		{{/if}}
+	</script>
+	
+	<script id="mixedArticleView" type="text/html">
+		<h1>Hello World!</h1>
+	</script>
+	
+</div>

@@ -6,19 +6,20 @@
   ],
   "main": "index.html",
   "license": "MIT",
-	"dependencies": {
+  "dependencies": {
     "requirejs": "latest",
     "jquery": "latest",
     "backbone-amd": "latest",
-		"lodash": "latest",
-		"bootstrap": "latest"
-	},
+    "lodash": "latest",
+    "bootstrap": "latest",
+    "handlebars": "latest"
+  },
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-		"components",
+    "components",
     "test",
     "tests"
   ]
