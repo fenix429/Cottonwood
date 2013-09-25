@@ -13,5 +13,8 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('frontend');
 });
+
+Route::resource('feed', 'FeedController');
+Route::resource('feed.article', 'ArticleController');
