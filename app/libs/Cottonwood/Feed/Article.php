@@ -66,7 +66,7 @@ class Article
     
     public function getHash()
     {
-        return md5($this->title . $this->link);
+        return md5($this->_title . $this->_link . $this->getTimestamp());
     }
     
     public function compareHash($hash)
