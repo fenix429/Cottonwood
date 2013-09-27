@@ -64,6 +64,16 @@ class Article
         return is_null($this->_published)? NULL : $this->_published->getTimestamp();
     }
     
+    public function getHash()
+    {
+        return md5($this->title . $this->link);
+    }
+    
+    public function compareHash($hash)
+    {
+        return $hash === $this->getHash();
+    }
+    
     public function getMeta($name)
     {
         $result = [];
