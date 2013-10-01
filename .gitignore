@@ -2,6 +2,7 @@
 /vendor
 /public/components
 /public/bower_components
+/node_modules
 composer.phar
 composer.lock
 .DS_Store
