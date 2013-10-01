@@ -3,6 +3,7 @@
 namespace Cottonwood;
 
 use \DomDocument;
+use \Exception;
 use Cottonwood\Feed\AtomDocument;
 use Cottonwood\Feed\RssDocument;
 
@@ -17,7 +18,7 @@ class Feed
     // Return FeedDocument Object
     public static function fetch($url)
     {
-        $src = file_get_contents($url);
+        $src = @file_get_contents($url);
         
         if ($src === FALSE) {
             throw new Exception("Could not open resource.");
