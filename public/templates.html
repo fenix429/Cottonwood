@@ -1,15 +1,10 @@
 
 <div id="templates">
 	
-	<script id="articleCollectionView" type="text/html">
-		{{#articles}}
-			<article data-article-id="{{id}}">
-				<a href="{{url}}" class="title">{{title}}</a>
-				<p>{{text}}</p>
-			</article>
-		{{else}}
-			<strong>No Articles Found.</strong>
-		{{/articles}}
+	<script id="articleView" type="text/html">
+		<a href="{{link}}" class="title">{{{title}}}</a>
+		<div class="date">{{published}}</div>
+		<div class="summary">{{prepImages summary}}</div>
 	</script>
 	
 	<script id="feedCollectionView" type="text/html">
