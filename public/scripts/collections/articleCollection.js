@@ -13,7 +13,7 @@ define(["backbone", "models/article"], function(Bacbone, Article){
 		},
 		
 		toArrayOfAttributes: function(){
-			return this.map(function(model) { return model.attributes });
+			return this.map(function(model) { return model.getAttributes(); });
 		}
 	});
 	
