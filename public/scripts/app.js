@@ -2,19 +2,29 @@
 define([
 	"jquery",
 	"backbone",
+	"socket.io",
 	"dispatcher",
 	"views/feedCollectionView",
 	"views/mixedArticleView",
 	"views/articleCollectionView"
-], function($, Backbone, Dispatch, FeedCollectionView, MixedArticleView, ArticleCollectionView){
+], function($, Backbone, io, Dispatch, FeedCollectionView, MixedArticleView, ArticleCollectionView){
 	
 	var App = function(){
 		var _this = this;
 		
 		this.$content = $("#content");
-		this.views = [];
+		this.socket = io.connect('http://localhost:8080');
+        this.views = [];
 		
 		this.views["feeds"] = new FeedCollectionView();
+		
+		Dispatch.on("subscribe:feed", function(id){
+    		_this.socket.emit("subscribe", { "room": "feed-" + id });
+		});
+		
+		this.socket.on("newArticle", function(data){
+		    Dispatch.trigger("article:add", data.article);
+		});
 	};
 	
 	App.prototype.show = function(id) {
