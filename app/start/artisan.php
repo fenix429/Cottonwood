@@ -11,3 +11,5 @@
 |
 */
 
+Artisan::add(new IndexFeedsCommand);
+Artisan::add(new PruneFeedsCommand);
