@@ -5,7 +5,9 @@ require.config({
 		"underscore": "/components/lodash/dist/lodash",
 		"backbone": "/components/backbone-amd/backbone",
 		"bootstrap": "/components/bootstrap/dist/js/bootstrap",
-		"handlebars": "/components/handlebars/handlebars"
+		"handlebars": "/components/handlebars/handlebars",
+		"moment": "/components/momentjs/moment",
+		"socket.io": "/components/socket.io-client/dist/socket.io"
 	},
 	shim: {
 		"handlebars": {
