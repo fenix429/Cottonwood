@@ -12,7 +12,9 @@
     "backbone-amd": "latest",
     "lodash": "latest",
     "bootstrap": "latest",
-    "handlebars": "latest"
+    "handlebars": "latest",
+    "momentjs": "latest",
+    "socket.io-client": "latest"
   },
   "private": true,
   "ignore": [
