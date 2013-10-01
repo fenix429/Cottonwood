@@ -1,5 +1,12 @@
 <?php 
 
+/*
+ * Learn more about RSS 1.0!
+ * 
+ * this might (is likely to?) to choke HARD on anything < RSS 2.0
+ * 
+ */
+
 namespace Cottonwood\Feed;
 
 use DateTime;
@@ -61,7 +68,7 @@ class RssDocument extends FeedDocument
                     case "description":
                         $summary = $element->value;
                         break;
-                    case "content":
+                    case "content:encoded":
                         $content = $element->value;
                         break;
                     case "pubDate":
