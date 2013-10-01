@@ -1,6 +1,27 @@
 
 define(["jquery", "handlebars"], function($, Handlebars){
 	
+	// adjust oversized images in feeds
+	// TODO: rework for responsive layout - enquire.js?
+    Handlebars.registerHelper('prepImages', function(html) {
+        // wrap in div because .html() returns the innerHTML value
+        var $html = $('<div>' + html + '</div>');
+        
+        $html.find('img').each(function(idx, img){
+            var $img = $(img);
+            var width = $img.attr('width');
+            
+            if(width > 780) {
+                $img.removeAttr('width').removeAttr('height');
+                $img.css({'width' : '100%'});
+            }
+        });
+        
+        // this *should* be sanitized on the server already
+        // need to run tests for XSS
+        return new Handlebars.SafeString($html.html());
+    });
+	
 	// precompiled templates
 	if(Handlebars.templates) {
 		return Handlebars.templates
@@ -16,7 +37,7 @@ define(["jquery", "handlebars"], function($, Handlebars){
 	var rawTemplates = $(src).find('script[type="text/html"]'),
 		compiledTemplates = {};
 	
-	rawTemplates.each(function(i, t){
+	rawTemplates.each(function(){
 		var name = $(this).attr('id'),
 			content = $(this).html();
 		
