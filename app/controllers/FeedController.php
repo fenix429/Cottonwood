@@ -9,7 +9,7 @@ class FeedController extends BaseController {
 	 */
 	public function index()
 	{
-		$feeds = Feed::all();
+		$feeds = Models\Feed::all();
         return Response::make($feeds->toJSON(), 200)->header('Content-Type', 'application/json');
 	}
 
@@ -32,7 +32,7 @@ class FeedController extends BaseController {
 	{
 		$input = Input::all();
 		
-		$feed = Feed::create($input);
+		$feed = Models\Feed::create($input);
 		$feed->save();
 		
 		return Response::make($feed->toJSON(), 200)->header('Content-Type', 'application/json');
@@ -46,7 +46,7 @@ class FeedController extends BaseController {
 	 */
 	public function show($id)
 	{
-        $feed = Feed::find($id);
+        $feed = Models\Feed::find($id);
         return Response::make($feed->toJSON(), 200)->header('Content-Type', 'application/json');
 	}
 
@@ -70,7 +70,7 @@ class FeedController extends BaseController {
 	public function update($id)
 	{
 		$input = Input::all();
-		$feed = Feed::find($id);
+		$feed = Models\Feed::find($id);
 		
 		$feed->fill($input);
 		$feed->save();
@@ -86,7 +86,7 @@ class FeedController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Feed::destroy($id);
+		Models\Feed::destroy($id);
 		
 		return Response::make(json_encode(null), 200)->header('Content-Type', 'application/json');
 	}
