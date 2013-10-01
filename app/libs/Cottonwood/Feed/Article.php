@@ -94,4 +94,21 @@ class Article
         
         return $result;
     }
+    
+    public function toArray()
+    {
+        return [
+    	    "title"     => $this->getTitle(),
+    	    "link"      => $this->getLink(),
+    	    "summary"   => $this->getSummary(),
+    	    "content"   => $this->getContent(),
+    	    "timestamp" => $this->getTimestamp(),
+    	    "hash"      => $this->getHash()
+    	];
+    }
+    
+    public function toJSON()
+    {
+        return json_encode($this->toArray());
+    }
 }
