@@ -7,38 +7,7 @@ class ArticleController extends BaseController {
 	
 	public function __construct()
 	{
-		$this->articles = array(
-			array(
-				"title" => "Article 1",
-				"url" => "http://www.example.com/some/url/here/1",
-				"text" => $this->_random_lipsum(),
-			),
-			array(
-				"title" => "Article 2",
-				"url" => "http://www.example.com/some/url/here/2",
-				"text" => $this->_random_lipsum(),
-			),
-			array(
-				"title" => "Article 3",
-				"url" => "http://www.example.com/some/url/here/3",
-				"text" => $this->_random_lipsum(),
-			),
-			array(
-				"title" => "Article 4",
-				"url" => "http://www.example.com/some/url/here/4",
-				"text" => $this->_random_lipsum(),
-			),
-			array(
-				"title" => "Article 5",
-				"url" => "http://www.example.com/some/url/here/5",
-				"text" => $this->_random_lipsum(),
-			),
-			array(
-				"title" => "Article 6",
-				"url" => "http://www.example.com/some/url/here/6",
-				"text" => $this->_random_lipsum(),
-			)
-		);
+		
 	}
 	
 	/**
@@ -48,9 +17,9 @@ class ArticleController extends BaseController {
 	 */
 	public function index($feedId)
 	{
-		$articles = $this->_add_feed_id($feedId, $this->articles);
+		$articles = Models\Feed::find($feedId)->articles()->where('unread', TRUE)->get();
 		
-		return Response::make(json_encode($articles), 200)->header('Content-Type', 'application/json');
+		return Response::make($articles->toJSON(), 200)->header('Content-Type', 'application/json');
 	}
 
 	/**
@@ -115,19 +84,6 @@ class ArticleController extends BaseController {
 	public function destroy($feedId, $taskId)
 	{
 		
-	}
-	
-	private function _add_feed_id($feedId, $articles)
-	{
-		return array_map(function($article) use ($feedId){
-			$article["feed_id"] = $feedId;
-			return $article;
-		}, $articles);
-	}
-	
-	private function _random_lipsum($amount = 1, $what = 'paras', $start = 0)
-	{
-		return (string) simplexml_load_file("http://www.lipsum.com/feed/xml?amount={$amount}&what={$what}&start={$start}")->lipsum;
 	}
 
 }
