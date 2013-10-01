@@ -1,0 +1,20 @@
+{
+  "name": "Cottonwood",
+  "version": "0.1",
+  "homepage": "",
+  "author": {
+      "name": "Jonathan Biddle",
+      "email": ""
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-watch": "*"
+  },
+  "dependencies": {
+    
+  }
+}
