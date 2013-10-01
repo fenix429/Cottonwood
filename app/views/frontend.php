@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Cottonwood</title>
     <link rel="stylesheet" type="text/css" href="/components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/styles/main.css">
     <script src="/components/requirejs/require.js" data-main="/scripts/main"></script>
 </head>
 <body>
