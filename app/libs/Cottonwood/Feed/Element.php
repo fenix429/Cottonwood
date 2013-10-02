@@ -65,7 +65,7 @@ class Element
     public function getAttr($key)
     {
         if (array_key_exists($key, $this->_attrs)) {
-            return $this->_meta[$key];
+            return $this->_attrs[$key];
         }
         
         return NULL;
@@ -84,13 +84,13 @@ class Element
         foreach ($node->childNodes as $child) {
             $innerXML .= $node->ownerDocument->saveXML($child);
         }
-    
+        
         return $innerXML; 
     }
     
     private static function _nodeHasChildElements(DomNode $node)
     {
-        if ($node->nodeName != XML_ELEMENT_NODE) {
+        if ($node->nodeType != XML_ELEMENT_NODE) {
             return FALSE; // only elements can have children
         }
         

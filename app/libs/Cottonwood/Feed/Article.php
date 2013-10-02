@@ -18,8 +18,8 @@ class Article
     {
         $this->_title     = htmlentities($title);
         $this->_link      = htmlspecialchars($link);
-        $this->_summary   = Purifier::clean($summary);
-        $this->_content   = Purifier::clean($content);
+        $this->_summary   = Purifier::clean(trim($summary));
+        $this->_content   = Purifier::clean(trim($content));
         $this->_published = ($published instanceof DateTime)? $published : NULL;
         $this->_meta      = is_array($meta)? $meta : [];
     }
@@ -36,7 +36,7 @@ class Article
     
     public function getSummary()
     {
-        return $this->_summary;
+        return trim($this->_summary);
     }
     
     public function getSummaryAsText()
@@ -51,7 +51,7 @@ class Article
     
     public function getContent()
     {
-        return $this->_content;
+        return trim($this->_content);
     }
     
     public function getPublishDate($format = "D, d M Y h:i a")
