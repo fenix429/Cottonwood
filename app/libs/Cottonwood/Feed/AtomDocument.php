@@ -112,4 +112,25 @@ class AtomDocument extends FeedDocument
     {
         return $this->_articles;
     }
+    
+    public function getMeta($name)
+    {
+        $result = [];
+        
+        foreach ($this->_meta as $item) {    
+            if ($item->name === $name) {
+                array_push($result, $item);
+            }
+        }
+        
+        if (count($result) == 1) {
+            return array_shift($result);
+        }
+        
+        if (empty($result)) {
+            return NULL;
+        }
+        
+        return $result;
+    }
 }
