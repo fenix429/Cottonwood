@@ -73,7 +73,7 @@ class Element
     
     public function setAttr($key, $value)
     {
-        $this->_meta[$key] = $value;
+        $this->_attrs[$key] = $value;
     }
     
     // Utils
