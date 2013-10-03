@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Example Atom</title>
+ <subtitle>Lorem ipsum dolor sit amet.</subtitle>
+ <link rel="self" href="http://example.com/atom"/>
+ <link rel="alternate" href="http://example.com/"/>
+ <updated>2006-09-11T02:35:33-07:00</updated>
+
+ <author>
+   <name>John Doe</name>
+   <uri>http://example.com/</uri>
+ </author>
+
+ <id>http://example.com/feed_id.html</id>
+ <icon>http://example.com/siteicon.png</icon>
+ <rights>2006 John Doe</rights>
+
+ <entry>
+   <title>My First Entry</title>
+   <id>tag:example.com,2006-09-11:015218</id>
+   <updated>2006-09-11T02:35:33-07:00</updated>
+   <summary>He often used to say there was only one Road; that it was like a great river: its springs were at every doorstep and every path was its tributary. "It's a dangerous business, Frodo, going out of your door," he used to say. "You step into the Road, and if you don't keep your feet, there is no telling where you might be swept off to."</summary>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+          <p>He often used to say there was only one Road; that it was like a great river: its springs were at every doorstep and every path was its tributary. &quot;It's a dangerous business, Frodo, going out of your door,&quot; he used to say. &quot;You step into the Road, and if you don't keep your feet, there is no telling where you might be swept off to.&quot;</p>
+          <!-- more xhtml here -->
+      </div>
+   </content>
+   <link rel="alternate" href="http://example.com/first.html"/>
+ </entry>
+
+</feed>

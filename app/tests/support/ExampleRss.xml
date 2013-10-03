@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+
+<channel>
+  
+  <title>Example RSS</title>
+  <link>http://www.example.com/</link>
+  <description>Lorem ipsum dolor sit amet.</description>
+  <pubDate>Tue, 15 Mar 2005 17:18:08 +1100</pubDate>
+  <copyright>2006 John Doe</copyright>
+  
+    <item>
+        <title>My First Entry</title>
+        <link>http://example.com/first.html</link>
+        <pubDate>Tue, 15 Mar 2005 17:18:08 +1100</pubDate>
+        <description>He often used to say there was only one Road; that it was like a great river: its springs were at every doorstep and every path was its tributary. "It's a dangerous business, Frodo, going out of your door," he used to say. "You step into the Road, and if you don't keep your feet, there is no telling where you might be swept off to."</description>
+        <content:encoded>
+            <![CDATA[
+            <div>
+                <p>He often used to say there was only one Road; that it was like a great river: its springs were at every doorstep and every path was its tributary. &quot;It's a dangerous business, Frodo, going out of your door,&quot; he used to say. &quot;You step into the Road, and if you don't keep your feet, there is no telling where you might be swept off to.&quot;</p>
+            </div>
+            ]]>
+        </content:encoded>
+    </item>
+</channel>
+
+</rss>
