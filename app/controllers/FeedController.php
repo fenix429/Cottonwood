@@ -4,9 +4,9 @@ use Cottonwood\Storage\Feed\FeedRepository;
 
 class FeedController extends BaseController
 {
-    public function __construct(FeedRepository $feedRepository)
+    public function __construct(FeedRepository $repository)
     {
-        $this->repository = $feedRepository;
+        $this->repository = $repository;
     }
 
 	/**
