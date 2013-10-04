@@ -16,5 +16,5 @@ Route::get('/', function()
 	return View::make('frontend');
 });
 
-Route::resource('feed', 'FeedController');
+Route::resource('feed', 'FeedController', array('except' => array('create', 'edit')));
 Route::resource('feed.article', 'ArticleController');

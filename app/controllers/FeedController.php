@@ -21,16 +21,6 @@ class FeedController extends BaseController
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-        
-	}
-
-	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
@@ -53,18 +43,8 @@ class FeedController extends BaseController
 	public function show($id)
 	{
         $feed = $this->repository->find($id);
-        return Response::make($feed->toJSON(), 200)->header('Content-Type', 'application/json');
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
         
+        return Response::make($feed->toJSON(), 200)->header('Content-Type', 'application/json');
 	}
 
 	/**
