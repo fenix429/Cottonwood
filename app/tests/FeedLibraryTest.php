@@ -1,16 +1,15 @@
 <?php
 
-use Cottonwood\Feed\FeedDocument;
-use Cottonwood\Feed\AtomDocument;
-use Cottonwood\Feed\RssDocument;
+use Cottonwood\Feed\Document\AtomDocument;
+use Cottonwood\Feed\Document\RssDocument;
 
 class FeedLibraryTest extends TestCase
 {
     public function testCreateFromFile()
     {
-        $feedDocument = Cottonwood\Feed\Utils::createFromFile(__DIR__ . '/support/ExampleRss.xml');
+        $feedDocument = Feed::createFromFile(__DIR__ . '/support/ExampleRss.xml');
         
-        $this->assertInstanceOf('Cottonwood\Feed\FeedDocument', $feedDocument, 'Feed::fetch() should return an instance of FeedDocument');
+        $this->assertInstanceOf('Cottonwood\Feed\Document\FeedDocument', $feedDocument, 'Feed::createFromFile() should return an instance of FeedDocument');
     }
     
     /**
@@ -19,23 +18,23 @@ class FeedLibraryTest extends TestCase
      */
     public function testCreateFromFileInvalidLocation()
     {
-        $feedDocument = Cottonwood\Feed\Utils::createFromFile('./somewhere/that/does/not/exist.xml');
+        $feedDocument = Feed::createFromFile('./somewhere/that/does/not/exist.xml');
     }
     
     public function testCreateFromFileRssDocument()
     {
-        $feedDocument = Cottonwood\Feed\Utils::createFromFile(__DIR__ . '/support/ExampleRss.xml');
+        $feedDocument = Feed::createFromFile(__DIR__ . '/support/ExampleRss.xml');
         
-        $this->assertInstanceOf('Cottonwood\Feed\RssDocument', $feedDocument, 'Feed::fetch() should return and instance of RssDocument when parsing an Rss Feed');
+        $this->assertInstanceOf('Cottonwood\Feed\Document\RssDocument', $feedDocument, 'Feed::createFromFile() should return and instance of RssDocument when parsing an Rss Feed');
         
         return $feedDocument;
     }
     
     public function testCreateFromFileAtomDocument()
     {
-        $feedDocument = Cottonwood\Feed\Utils::createFromFile(__DIR__ . '/support/ExampleAtom.xml');
+        $feedDocument = Feed::createFromFile(__DIR__ . '/support/ExampleAtom.xml');
         
-        $this->assertInstanceOf('Cottonwood\Feed\AtomDocument', $feedDocument, 'Feed::fetch() should return and instance of AtomDocument when parsing an Atom Feed');
+        $this->assertInstanceOf('Cottonwood\Feed\Document\AtomDocument', $feedDocument, 'Feed::createFromFile() should return and instance of AtomDocument when parsing an Atom Feed');
         
         return $feedDocument;
     }
@@ -82,7 +81,7 @@ class FeedLibraryTest extends TestCase
         
         $article = $articles[0];
         
-        $this->assertInstanceOf('Cottonwood\Feed\Article', $article, 'The array returned by getArticles() should contain instances of Article.');
+        $this->assertInstanceOf('Cottonwood\Feed\Support\Article', $article, 'The array returned by getArticles() should contain instances of Article.');
         
         $this->assertInternalType('string', $article->getTitle(), 'The Article\'s title should be of type string.');
         $this->assertEquals('My First Entry', $article->getTitle(), 'The Article\'s title should match the value in the test document');
@@ -123,7 +122,7 @@ class FeedLibraryTest extends TestCase
         
         $article = $articles[0];
         
-        $this->assertInstanceOf('Cottonwood\Feed\Article', $article, 'The array returned by getArticles() should contain instances of Article.');
+        $this->assertInstanceOf('Cottonwood\Feed\Support\Article', $article, 'The array returned by getArticles() should contain instances of Article.');
         
         $this->assertInternalType('string', $article->getTitle(), 'The Article\'s title should be of type string.');
         $this->assertEquals('My First Entry', $article->getTitle(), 'The Article\'s title should match the value in the test document');
@@ -157,7 +156,7 @@ class FeedLibraryTest extends TestCase
     
     public function testElementClass()
     {
-        $element = new Cottonwood\Feed\Element('name', 'value', ['attr' => 'attrVal']);
+        $element = new Cottonwood\Feed\Support\Element('name', 'value', ['attr' => 'attrVal']);
         
         $element->name = 'newName';
         $this->assertTrue($element->name === 'newName', 'We should be able to set the name attribute.');
@@ -190,8 +189,8 @@ class FeedLibraryTest extends TestCase
         $doc->loadXML($secondFragment);
         $secondNode = $doc->getElementsByTagName('div')->item(0);
         
-        $firstElement = Cottonwood\Feed\Element::createFromDomNode($firstNode);
-        $secondElement = Cottonwood\Feed\Element::createFromDomNode($secondNode);
+        $firstElement = Cottonwood\Feed\Support\Element::createFromDomNode($firstNode);
+        $secondElement = Cottonwood\Feed\Support\Element::createFromDomNode($secondNode);
         
         $this->assertEquals('div', $firstElement->name, 'The name should be set correctly.');
         
