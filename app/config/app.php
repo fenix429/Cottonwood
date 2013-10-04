@@ -117,6 +117,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Mews\Purifier\PurifierServiceProvider',
+		'Cottonwood\Storage\StorageServiceProvider',
 
 	),
 

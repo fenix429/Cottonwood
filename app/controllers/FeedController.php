@@ -1,6 +1,13 @@
 <?php
 
-class FeedController extends BaseController {
+use Cottonwood\Storage\Feed\FeedRepository;
+
+class FeedController extends BaseController
+{
+    public function __construct(FeedRepository $feedRepository)
+    {
+        $this->repository = $feedRepository;
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +16,7 @@ class FeedController extends BaseController {
 	 */
 	public function index()
 	{
-		$feeds = Models\Feed::all();
+		$feeds = $this->repository->findAll();
         return Response::make($feeds->toJSON(), 200)->header('Content-Type', 'application/json');
 	}
 
@@ -32,8 +39,7 @@ class FeedController extends BaseController {
 	{
 		$input = Input::all();
 		
-		$feed = Models\Feed::create($input);
-		$feed->save();
+		$feed = $this->repository->create($input);
 		
 		return Response::make($feed->toJSON(), 200)->header('Content-Type', 'application/json');
 	}
@@ -46,7 +52,7 @@ class FeedController extends BaseController {
 	 */
 	public function show($id)
 	{
-        $feed = Models\Feed::find($id);
+        $feed = $this->repository->find($id);
         return Response::make($feed->toJSON(), 200)->header('Content-Type', 'application/json');
 	}
 
@@ -70,12 +76,9 @@ class FeedController extends BaseController {
 	public function update($id)
 	{
 		$input = Input::all();
-		$feed = Models\Feed::find($id);
+		$feed = $this->repository->update($id, $input);
 		
-		$feed->fill($input);
-		$feed->save();
-		
-		return Response::make($feeds->toJSON(), 200)->header('Content-Type', 'application/json');
+		return Response::make($feed->toJSON(), 200)->header('Content-Type', 'application/json');
 	}
 
 	/**
@@ -86,9 +89,9 @@ class FeedController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Models\Feed::destroy($id);
+		$this->repository->destroy($id);
 		
-		return Response::make(json_encode(null), 200)->header('Content-Type', 'application/json');
+		return Response::make(json_encode(['status' => 1]), 200)->header('Content-Type', 'application/json');
 	}
 
 }
