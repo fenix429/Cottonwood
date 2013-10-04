@@ -3,7 +3,7 @@
 namespace Cottonwood\Storage;
  
 use Illuminate\Support\ServiceProvider;
-use \App;
+use App;
  
 class StorageServiceProvider extends ServiceProvider
 {
