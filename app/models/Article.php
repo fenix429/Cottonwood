@@ -3,7 +3,6 @@
 namespace Models;
 
 use \Eloquent;
-use \Cottonwood\Feed\Article as ArticleObj;
 
 class Article extends Eloquent {
 	protected $guarded = array("id", "created_at", "updated_at");
@@ -14,9 +13,9 @@ class Article extends Eloquent {
     {
         return $this->belongsTo('Models\Feed');
     }
-	
-	public static function createFromObject(ArticleObj $articleObj)
-	{
-    	return new Article($articleObj->toArray());
-	}
+    
+    public function scopeUnread($query)
+    {
+        return $query->where('unread', TRUE);
+    }
 }
