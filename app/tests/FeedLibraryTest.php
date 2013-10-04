@@ -1,15 +1,14 @@
 <?php
 
-use Cottonwood\Feed;
 use Cottonwood\Feed\FeedDocument;
 use Cottonwood\Feed\AtomDocument;
 use Cottonwood\Feed\RssDocument;
 
 class FeedLibraryTest extends TestCase
 {
-    public function testFeedFetch()
+    public function testCreateFromFile()
     {
-        $feedDocument = Feed::fetch(__DIR__ . '/support/ExampleRss.xml');
+        $feedDocument = Cottonwood\Feed\Utils::createFromFile(__DIR__ . '/support/ExampleRss.xml');
         
         $this->assertInstanceOf('Cottonwood\Feed\FeedDocument', $feedDocument, 'Feed::fetch() should return an instance of FeedDocument');
     }
@@ -18,23 +17,23 @@ class FeedLibraryTest extends TestCase
      * @expectedException Exception
      * @expectedExceptionMessage Could not open resource.
      */
-    public function testFeedFetchInvalidLocation()
+    public function testCreateFromFileInvalidLocation()
     {
-        $feedDocument = Feed::fetch('./somewhere/that/does/not/exist.xml');
+        $feedDocument = Cottonwood\Feed\Utils::createFromFile('./somewhere/that/does/not/exist.xml');
     }
     
-    public function testRssDocumentFetch()
+    public function testCreateFromFileRssDocument()
     {
-        $feedDocument = Feed::fetch(__DIR__ . '/support/ExampleRss.xml');
+        $feedDocument = Cottonwood\Feed\Utils::createFromFile(__DIR__ . '/support/ExampleRss.xml');
         
         $this->assertInstanceOf('Cottonwood\Feed\RssDocument', $feedDocument, 'Feed::fetch() should return and instance of RssDocument when parsing an Rss Feed');
         
         return $feedDocument;
     }
     
-    public function testAtomDocumentFetch()
+    public function testCreateFromFileAtomDocument()
     {
-        $feedDocument = Feed::fetch(__DIR__ . '/support/ExampleAtom.xml');
+        $feedDocument = Cottonwood\Feed\Utils::createFromFile(__DIR__ . '/support/ExampleAtom.xml');
         
         $this->assertInstanceOf('Cottonwood\Feed\AtomDocument', $feedDocument, 'Feed::fetch() should return and instance of AtomDocument when parsing an Atom Feed');
         
@@ -42,7 +41,7 @@ class FeedLibraryTest extends TestCase
     }
     
     /**
-     * @depends testRssDocumentFetch
+     * @depends testCreateFromFileRssDocument
      */
     public function testRssDocumentProperties(RssDocument $document)
     {
@@ -57,7 +56,7 @@ class FeedLibraryTest extends TestCase
     }
     
     /**
-     * @depends testAtomDocumentFetch
+     * @depends testCreateFromFileAtomDocument
      */
     public function testAtomDocumentProperties(AtomDocument $document)
     {
@@ -73,7 +72,7 @@ class FeedLibraryTest extends TestCase
     }
     
     /**
-     * @depends testRssDocumentFetch
+     * @depends testCreateFromFileRssDocument
      */
     public function testRssDocumentArticles(RssDocument $document)
     {
@@ -114,7 +113,7 @@ class FeedLibraryTest extends TestCase
     }
     
     /**
-     * @depends testAtomDocumentFetch
+     * @depends testCreateFromFileAtomDocument
      */
     public function testAtomDocumentArticles(AtomDocument $document)
     {

@@ -1,13 +1,11 @@
 <?php 
 
-namespace Cottonwood;
+namespace Cottonwood\Feed;
 
 use \DomDocument;
 use \Exception;
-use Cottonwood\Feed\AtomDocument;
-use Cottonwood\Feed\RssDocument;
 
-class Feed
+class Utils
 {
     // Do not allow me to instantiated
     private function __construct()
@@ -16,9 +14,9 @@ class Feed
     }
     
     // Return FeedDocument Object
-    public static function fetch($url)
+    public static function createFromFile($loc)
     {
-        $src = @file_get_contents($url);
+        $src = @file_get_contents($loc);
         
         if ($src === FALSE) {
             throw new Exception("Could not open resource.");

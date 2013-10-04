@@ -46,7 +46,7 @@ class IndexFeedsCommand extends Command {
     		
     		try {
         		
-        		$feedDoc = Cottonwood\Feed::fetch($feed->url);
+        		$feedDoc = Cottonwood\Feed\Utils::createFromFile($feed->url);
                 $cnt = 0;
                 
         		foreach ($feedDoc->getArticles() as $articleObj) {
