@@ -37,6 +37,8 @@ class PruneFeedsCommand extends Command {
 	 */
 	public function fire()
 	{
+	    $repository = App::make('ArticleRepository');
+	    
 		$ageToPrune = strtotime($this->option('age'));
 		$pruneUnread = (bool) $this->option('unread');
 		
@@ -45,13 +47,7 @@ class PruneFeedsCommand extends Command {
     		exit();
 		}
 		
-		$articles = DB::table('articles')->where("timestamp", "<", $ageToPrune);
-        
-        if (!$pruneUnread) {
-            $articles->where('unread', FALSE);
-        }
-        
-        $rowsAffected = $articles->delete();
+		$rowsAffected = $repository->prune($ageToPrune, $pruneUnread);
         
         $this->info("Done, {$rowsAffected} rows deleted.");
 	}

@@ -37,11 +37,12 @@ class IndexFeedsCommand extends Command {
 	 */
 	public function fire()
 	{
-		$feeds = Models\Feed::all();
+		$feedRepository = App::make('FeedRepository');
+		$articleRepository = App::make('ArticleRepository');
 		$redis = new Redis();
 		$redis->connect('127.0.0.1', 6379);
 		
-		foreach ($feeds as $feed) {
+		foreach ($feedRepository->findAll() as $feed) {
     		$this->info("Fetching {$feed->url}");
     		
     		try {
@@ -50,15 +51,14 @@ class IndexFeedsCommand extends Command {
                 $cnt = 0;
                 
         		foreach ($feedDoc->getArticles() as $articleObj) {
-            		$recordExists = DB::table("articles")->where("hash", $articleObj->getHash())->count();
+            		$recordExists = $articleRepository->checkArticleExists($articleObj->getHash());
             		
             		if ($recordExists) {
                 		continue; // skip this article
             		}
             		
-            		$articleModel = Models\Article::createFromObject($articleObj);
+            		$articleModel = $articleRepository->create($feed->id, $articleObj->toArray());
             		
-            		$feed->articles()->save($articleModel);
             		$redis->publish("cw-notif", json_encode( ["room" => "feed-{$feed->id}", "article" => $articleModel->toArray()] ));
             		
             		$cnt++;
