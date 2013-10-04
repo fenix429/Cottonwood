@@ -9,7 +9,7 @@ class EloquentFeedRepository implements FeedRepository
 {
     public function find($id)
     {
-        return Feed::find($id);
+        return Feed::findOrFail($id);
     }
     
     public function findAll()
