@@ -7,7 +7,7 @@ class FeedLibraryTest extends TestCase
 {
     public function testCreateFromFile()
     {
-        $feedDocument = Feed::createFromFile(__DIR__ . '/support/ExampleRss.xml');
+        $feedDocument = FeedBuilder::createFromFile(__DIR__ . '/support/ExampleRss.xml');
         
         $this->assertInstanceOf('Cottonwood\Feed\Document\FeedDocument', $feedDocument, 'Feed::createFromFile() should return an instance of FeedDocument');
     }
@@ -18,12 +18,12 @@ class FeedLibraryTest extends TestCase
      */
     public function testCreateFromFileInvalidLocation()
     {
-        $feedDocument = Feed::createFromFile('./somewhere/that/does/not/exist.xml');
+        $feedDocument = FeedBuilder::createFromFile('./somewhere/that/does/not/exist.xml');
     }
     
     public function testCreateFromFileRssDocument()
     {
-        $feedDocument = Feed::createFromFile(__DIR__ . '/support/ExampleRss.xml');
+        $feedDocument = FeedBuilder::createFromFile(__DIR__ . '/support/ExampleRss.xml');
         
         $this->assertInstanceOf('Cottonwood\Feed\Document\RssDocument', $feedDocument, 'Feed::createFromFile() should return and instance of RssDocument when parsing an Rss Feed');
         
@@ -32,7 +32,7 @@ class FeedLibraryTest extends TestCase
     
     public function testCreateFromFileAtomDocument()
     {
-        $feedDocument = Feed::createFromFile(__DIR__ . '/support/ExampleAtom.xml');
+        $feedDocument = FeedBuilder::createFromFile(__DIR__ . '/support/ExampleAtom.xml');
         
         $this->assertInstanceOf('Cottonwood\Feed\Document\AtomDocument', $feedDocument, 'Feed::createFromFile() should return and instance of AtomDocument when parsing an Atom Feed');
         
@@ -150,55 +150,6 @@ class FeedLibraryTest extends TestCase
         
         $this->assertInternalType('array', $article->toArray(), 'The toArray() method should return a value of type array.');
         $this->assertInternalType('string', $article->toJSON(), 'The toJSON() method should return a value of type string.');
-    }
-    
-    // do testing with bad data???
-    
-    public function testElementClass()
-    {
-        $element = new Cottonwood\Feed\Support\Element('name', 'value', ['attr' => 'attrVal']);
-        
-        $element->name = 'newName';
-        $this->assertTrue($element->name === 'newName', 'We should be able to set the name attribute.');
-        
-        $element->value = 'newValue';
-        $this->assertTrue($element->value === 'newValue', 'We should be able to set the value attribute.');
-        
-        $element->attrs = ['different' => 'attribute'];
-        $this->assertFalse($element->attrs === ['different' => 'attribute'], 'We should not be able to set the attrs attribute.');
-        
-        $this->assertEquals('attrVal', $element->getAttr('attr'), 'The getAttr() method should return the correct value from attrs.');
-        
-        $element->setAttr('attr', 'newAttrVal');
-        $this->assertEquals('newAttrVal', $element->getAttr('attr'), 'The setAttr() method should change an existing value in attrs.');
-        
-        $element->setAttr('otherAttr', 'otherAttrVal');
-        $this->assertEquals('otherAttrVal', $element->getAttr('otherAttr'), 'The setAttr() method should set a new value in attrs.');
-    }
-    
-    public function testElementFactory()
-    {
-        $firstFragment = '<div id="myDiv"><p>Mary had a little lamb</p><p>It\'s fleece was white as snow</p></div>';
-        $secondFragment = '<div id="myOtherDiv">And everywhere that Mary went, the lamb was sure to go.</div>';
-        
-        $doc = new DOMDocument();
-        
-        $doc->loadXML($firstFragment);
-        $firstNode = $doc->getElementsByTagName('div')->item(0);
-        
-        $doc->loadXML($secondFragment);
-        $secondNode = $doc->getElementsByTagName('div')->item(0);
-        
-        $firstElement = Cottonwood\Feed\Support\Element::createFromDomNode($firstNode);
-        $secondElement = Cottonwood\Feed\Support\Element::createFromDomNode($secondNode);
-        
-        $this->assertEquals('div', $firstElement->name, 'The name should be set correctly.');
-        
-        $this->assertEquals('<p>Mary had a little lamb</p><p>It\'s fleece was white as snow</p>', $firstElement->value, 'The value should be set correctly when the node contains children.');
-        
-        $this->assertEquals('And everywhere that Mary went, the lamb was sure to go.', $secondElement->value, 'The value should be set correctly when the node does not contain children.');
-        
-        $this->assertEquals('myDiv', $firstElement->getAttr('id'), 'The node attributes should be parsed correctly.');
     }
 }
 
