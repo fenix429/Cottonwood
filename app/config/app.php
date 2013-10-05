@@ -186,6 +186,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Purifier'        => 'Mews\Purifier\Facades\Purifier',
+		'FactoryMuff'     => 'Zizaco\FactoryMuff\Facade\FactoryMuff',
 		'FeedBuilder'     => 'Cottonwood\Feed\Support\Facades\FeedBuilder',
 
 	),
