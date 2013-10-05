@@ -186,7 +186,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Purifier'        => 'Mews\Purifier\Facades\Purifier',
-		'Feed'            => 'Cottonwood\Feed\Support\Facades\Feed',
+		'FeedBuilder'     => 'Cottonwood\Feed\Support\Facades\FeedBuilder',
 
 	),
 

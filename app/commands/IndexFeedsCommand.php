@@ -47,7 +47,7 @@ class IndexFeedsCommand extends Command {
     		
     		try {
         		
-        		$feedDoc = Feed::createFromFile($feed->url);
+        		$feedDoc = FeedBuilder::createFromFile($feed->url);
                 $cnt = 0;
                 
         		foreach ($feedDoc->getArticles() as $articleObj) {
