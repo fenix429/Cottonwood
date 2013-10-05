@@ -3,6 +3,8 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Cottonwood\Storage\Feed\FeedRepository;
+use Cottonwood\Storage\Article\ArticleRepository;
 
 class IndexFeedsCommand extends Command {
 
@@ -27,6 +29,10 @@ class IndexFeedsCommand extends Command {
 	 */
 	public function __construct()
 	{
+	    $this->repos = new stdClass();
+	    $this->repos->feeds = App::make('FeedRepository');
+	    $this->repos->articles = App::make('ArticleRepository');
+	    
 		parent::__construct();
 	}
 
@@ -37,12 +43,11 @@ class IndexFeedsCommand extends Command {
 	 */
 	public function fire()
 	{
-		$feedRepository = App::make('FeedRepository');
-		$articleRepository = App::make('ArticleRepository');
+		// phpRedis extension - not Redis facade!
 		$redis = new Redis();
 		$redis->connect('127.0.0.1', 6379);
 		
-		foreach ($feedRepository->findAll() as $feed) {
+		foreach ($this->repos->feeds->findAll() as $feed) {
     		$this->info("Fetching {$feed->url}");
     		
     		try {
@@ -51,13 +56,12 @@ class IndexFeedsCommand extends Command {
                 $cnt = 0;
                 
         		foreach ($feedDoc->getArticles() as $articleObj) {
-            		$recordExists = $articleRepository->checkArticleExists($articleObj->getHash());
-            		
-            		if ($recordExists) {
+        		    // if record exists
+            		if ($this->repos->articles->checkArticleExists($articleObj->getHash())) {
                 		continue; // skip this article
             		}
             		
-            		$articleModel = $articleRepository->create($feed->id, $articleObj->toArray());
+            		$articleModel = $this->repos->articles->create($feed->id, $articleObj->toArray());
             		
             		$redis->publish("cw-notif", json_encode( ["room" => "feed-{$feed->id}", "article" => $articleModel->toArray()] ));
             		
@@ -67,7 +71,7 @@ class IndexFeedsCommand extends Command {
         		$this->info("Indexed {$cnt} article(s)");
         		
     		} catch (Exception $ex) {
-        		$this->error("Error fetching {$feed->url}");
+        		$this->error("Error fetching {$feed->url}\n\n" . $ex->getMessage());
     		}
 		}
 	}
