@@ -4,13 +4,14 @@
     "keywords": [""],
     "license": "MIT",
     "require": {
-        "laravel/framework": "4.1.*",
+        "laravel/framework": "dev-master",
         "way/generators": "dev-master",
         "mews/purifier": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*",
-        "mockery/mockery": "0.7.*"
+        "phpunit/phpunit": "dev-master",
+        "mockery/mockery": "dev-master",
+        "zizaco/factory-muff": "dev-master"
     },
     "autoload": {
         "classmap": [
