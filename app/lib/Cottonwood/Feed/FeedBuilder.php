@@ -5,16 +5,15 @@ namespace Cottonwood\Feed;
 use \DomDocument;
 use \Exception;
 
-class Utils
+class FeedBuilder
 {
-    // Do not allow me to instantiated
-    private function __construct()
+    public function __construct()
     {
         
     }
     
     // Return FeedDocument Object
-    public static function createFromFile($loc)
+    public function createFromFile($loc)
     {
         $src = @file_get_contents($loc);
         
@@ -26,9 +25,9 @@ class Utils
         $dom->loadXML($src);
         
         if ($dom->getElementsByTagName('feed')->item(0) !== NULL) {
-            return new AtomDocument($dom);
+            return new Document\AtomDocument($dom);
         } else {
-            return new RssDocument($dom);
+            return new Document\RssDocument($dom);
         }
         
     }

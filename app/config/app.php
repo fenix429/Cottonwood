@@ -117,6 +117,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Mews\Purifier\PurifierServiceProvider',
+		'Cottonwood\Feed\FeedServiceProvider',
 		'Cottonwood\Storage\StorageServiceProvider',
 
 	),
@@ -185,6 +186,8 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Purifier'        => 'Mews\Purifier\Facades\Purifier',
+		'FactoryMuff'     => 'Zizaco\FactoryMuff\Facade\FactoryMuff',
+		'FeedBuilder'     => 'Cottonwood\Feed\Support\Facades\FeedBuilder',
 
 	),
 

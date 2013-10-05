@@ -1,6 +1,6 @@
 <?php 
 
-namespace Cottonwood\Feed;
+namespace Cottonwood\Feed\Support;
 
 use \DateTime;
 use Mews\Purifier\Purifier;
@@ -46,7 +46,7 @@ class Article
     
     public function hasContent()
     {
-        return empty($this->_content);
+        return !empty($this->_content);
     }
     
     public function getContent()

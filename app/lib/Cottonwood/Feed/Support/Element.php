@@ -1,6 +1,6 @@
 <?php 
 
-namespace Cottonwood\Feed;
+namespace Cottonwood\Feed\Support;
 
 use \DomNode;
 

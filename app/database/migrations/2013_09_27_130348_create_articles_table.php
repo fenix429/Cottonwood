@@ -12,20 +12,20 @@ class CreateArticlesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('articles', function(Blueprint $table)
+		Schema::create("articles", function(Blueprint $table)
 		{
-			$table->increments('id')->unsigned();
-			$table->string('title');
-			$table->string('link');
-			$table->text('summary');
-			$table->text('content');
-			$table->string('hash')->unique();
-			$table->integer('timestamp');
-			$table->boolean('unread')->default(TRUE);
-			$table->integer('feed_id')->unsigned();
+			$table->increments("id")->unsigned();
+			$table->string("title");
+			$table->string("link");
+			$table->text("summary");
+			$table->text("content");
+			$table->string("hash")->unique();
+			$table->integer("timestamp");
+			$table->boolean("unread")->default(TRUE);
+			$table->integer("feed_id")->unsigned();
 			$table->timestamps();
 			
-			$table->foreign('feed_id')->references('id')->on('feeds')->onDelete('cascade');
+			$table->foreign("feed_id")->references("id")->on("feeds")->onDelete("cascade");
 		});
 	}
 
@@ -36,7 +36,7 @@ class CreateArticlesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('articles');
+		Schema::drop("articles");
 	}
 
 }

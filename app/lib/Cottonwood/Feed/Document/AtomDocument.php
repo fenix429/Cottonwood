@@ -1,13 +1,13 @@
 <?php 
 
-namespace Cottonwood\Feed;
+namespace Cottonwood\Feed\Document;
 
 use \DateTime;
 use \DomDocument;
-use Cottonwood\Feed\Article;
-use Cottonwood\Feed\Element;
+use Cottonwood\Feed\Support\Article;
+use Cottonwood\Feed\Support\Element;
 
-class AtomDocument extends FeedDocument
+class AtomDocument implements FeedDocument
 {
     const FEED_TYPE = "ATOM";
     

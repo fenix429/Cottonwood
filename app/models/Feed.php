@@ -2,15 +2,22 @@
 
 namespace Models;
 
-use \Eloquent;
+class Feed extends BaseModel
+{
+	protected $guarded = array("id");
 
-class Feed extends Eloquent {
-	protected $guarded = array('id');
-
-	public static $rules = array();
+	public static $rules = array(
+	    "title" => "required",
+	    "url"   => "required|url"
+	);
+	
+	public static $factory = array(
+	    "title" => "text",
+	    "url"   => "http://example.com/",
+	);
 	
     public function articles()
     {
-        return $this->hasMany('Models\Article');
+        return $this->hasMany("Models\Article");
     }
 }
