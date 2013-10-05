@@ -11,7 +11,7 @@ class Article extends BaseModel
 		"link"      => "required|url",
 		"summary"   => "required",
 		"content"   => "required",
-		"hash"      => "required|unique:articles,articles",
+		"hash"      => "required|unique:articles,hash",
 		"timestamp" => "required|integer"
 	);
 	
