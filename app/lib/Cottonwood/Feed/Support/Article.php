@@ -46,7 +46,7 @@ class Article
     
     public function hasContent()
     {
-        return empty($this->_content);
+        return !empty($this->_content);
     }
     
     public function getContent()
