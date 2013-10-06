@@ -2,7 +2,7 @@
 
 namespace Cottonwood\Storage\Feed;
 
-use EloquentFeedModel as FeedModel;
+use Cottonwood\Storage\Feed\EloquentFeedModel as FeedModel;
 
 class EloquentFeedRepository implements FeedRepository
 {
@@ -14,7 +14,7 @@ class EloquentFeedRepository implements FeedRepository
 	 */
     public function find($id)
     {
-        return FeedModel::findOrFail($id);
+        return EloquentFeedModel::findOrFail($id);
     }
     
     /**

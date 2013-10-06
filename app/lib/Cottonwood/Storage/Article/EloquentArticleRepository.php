@@ -2,7 +2,7 @@
 
 namespace Cottonwood\Storage\Article;
 
-use EloquentArticleModel as ArticleModel;
+use Cottonwood\Storage\Article\EloquentArticleModel as ArticleModel;
 use Cottonwood\Storage\Feed\EloquentFeedModel as FeedModel;
 
 class EloquentArticleRepository implements ArticleRepository
