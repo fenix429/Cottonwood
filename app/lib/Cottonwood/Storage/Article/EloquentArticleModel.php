@@ -14,7 +14,6 @@ class EloquentArticleModel extends EloquentBaseModel
 	    "title"     => "required",
 		"link"      => "required|url",
 		"summary"   => "required",
-		"content"   => "required",
 		"hash"      => "required|unique:articles,hash",
 		"timestamp" => "required|integer"
 	);
@@ -23,7 +22,6 @@ class EloquentArticleModel extends EloquentBaseModel
 	    "title"     => "text",
 		"link"      => "http://example.com/article1.htm",
 		"summary"   => "text",
-		"content"   => "text",
 		"hash"      => "string",
 		"feed_id"   => "factory|Cottonwood\Storage\Feed\EloquentFeedModel",
 		"timestamp" => 1380943435
