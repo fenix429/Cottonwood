@@ -49,7 +49,7 @@ class EloquentArticleRepository implements ArticleRepository
     public function create($feedId, $input)
     {
         $feed = FeedModel::findOrFail($feedId);
-        $article = new Article($input);
+        $article = new ArticleModel($input);
         
         $feed->articles()->save($article);
         
@@ -80,7 +80,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function destroy($id)
     {
-        Article::destroy($id);
+        ArticleModel::destroy($id);
     }
     
     /**
@@ -91,7 +91,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function checkArticleExists($hash)
     {
-        return (Article::where("hash", $hash)->count() > 0)? TRUE : FALSE;
+        return (ArticleModel::where("hash", $hash)->count() > 0)? TRUE : FALSE;
     }
     
     /**
@@ -103,7 +103,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function prune($age, $unread)
     {
-        $articles = Article::where("timestamp", "<", $age);
+        $articles = ArticleModel::where("timestamp", "<", $age);
         
         // if $unread = TRUE then unread articles will also be deleted
         if (!$unread) {
