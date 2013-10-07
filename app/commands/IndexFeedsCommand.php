@@ -43,10 +43,6 @@ class IndexFeedsCommand extends Command {
 	 */
 	public function fire()
 	{
-		// phpRedis extension - not Redis facade!
-		$redis = new Redis();
-		$redis->connect('127.0.0.1', 6379);
-		
 		foreach ($this->repos->feeds->findAll() as $feed) {
     		$this->info("Fetching {$feed->url}");
     		
@@ -63,7 +59,7 @@ class IndexFeedsCommand extends Command {
             		
             		$articleModel = $this->repos->articles->create($feed->id, $articleObj->toArray());
             		
-            		$redis->publish("cw-notif", json_encode( ["room" => "feed-{$feed->id}", "article" => $articleModel->toArray()] ));
+            		MessagePublisher::send("feed-{$feed->id}", $articleModel->toArray());
             		
             		$cnt++;
         		}
