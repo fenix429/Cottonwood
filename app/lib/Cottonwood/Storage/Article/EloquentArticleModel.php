@@ -31,7 +31,7 @@ class EloquentArticleModel extends EloquentBaseModel
 	
 	public function feed()
     {
-        return $this->belongsTo("Cottonwood\Storage\Feed\EloquentFeedModel");
+        return $this->belongsTo("Cottonwood\Storage\Feed\EloquentFeedModel", "feed_id");
     }
     
     public function scopeUnread($query)

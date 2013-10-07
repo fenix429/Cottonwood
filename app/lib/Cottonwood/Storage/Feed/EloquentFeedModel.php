@@ -22,6 +22,6 @@ class EloquentFeedModel extends EloquentBaseModel
 	
     public function articles()
     {
-        return $this->hasMany("Cottonwood\Storage\Article\EloquentArticleModel");
+        return $this->hasMany("Cottonwood\Storage\Article\EloquentArticleModel", "feed_id");
     }
 }
