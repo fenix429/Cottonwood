@@ -1,9 +1,13 @@
 <?php
 
-namespace Models;
+namespace Cottonwood\Storage\Article;
 
-class Article extends BaseModel
+use Cottonwood\Storage\EloquentBaseModel;
+
+class EloquentArticleModel extends EloquentBaseModel
 {
+    protected $table = "articles";
+    
 	protected $guarded = array("id", "created_at", "updated_at");
 
 	public static $rules = array(
@@ -21,13 +25,13 @@ class Article extends BaseModel
 		"summary"   => "text",
 		"content"   => "text",
 		"hash"      => "string",
-		"feed_id"   => "factory|Models\Feed",
+		"feed_id"   => "factory|Cottonwood\Storage\Feed\EloquentFeedModel",
 		"timestamp" => 1380943435
 	);
 	
 	public function feed()
     {
-        return $this->belongsTo("Models\Feed");
+        return $this->belongsTo("Cottonwood\Storage\Feed\EloquentFeedModel", "feed_id");
     }
     
     public function scopeUnread($query)

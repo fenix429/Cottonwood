@@ -1,6 +1,6 @@
 <?php
 
-namespace Cottonwood\Feed\Support\Facades;
+namespace Cottonwood\Support\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

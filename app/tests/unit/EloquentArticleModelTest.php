@@ -1,10 +1,10 @@
 <?php
 
-class ArticleEloquentModelTest extends TestCase
+class EloquentArticleModelTest extends TestCase
 {
 	public function testDataValidation()
 	{
-        $article = FactoryMuff::create("Models\Article");
+        $article = FactoryMuff::create("Cottonwood\Storage\Article\EloquentArticleModel");
         
         $this->assertTrue($article->validate(), "The validate() method should return true with valid data.");
         
@@ -21,8 +21,8 @@ class ArticleEloquentModelTest extends TestCase
     
 	public function testRelationships()
 	{
-    	$article = FactoryMuff::create("Models\Article");
+    	$article = FactoryMuff::create("Cottonwood\Storage\Article\EloquentArticleModel");
     	
-    	$this->assertInstanceOf("Models\Feed", $article->feed()->first(), "The Article should belong to a Feed.");
+    	$this->assertInstanceOf("Cottonwood\Storage\Feed\EloquentFeedModel", $article->feed()->first(), "The Article should belong to a Feed.");
 	}
 }

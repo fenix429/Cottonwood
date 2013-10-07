@@ -4,7 +4,14 @@
 	<script id="articleView" type="text/html">
 		<a href="{{link}}" class="title">{{{title}}}</a>
 		<div class="date">{{published}}</div>
-		<div class="summary">{{prepImages summary}}</div>
+		
+		{{#unless_blank content}}
+		<div class="body">{{prepImages content}}</div>
+		{{else}}
+		<div class="body">{{prepImages summary}}</div>
+		{{/unless_blank}}
+		
+		
 	</script>
 	
 	<script id="feedCollectionView" type="text/html">

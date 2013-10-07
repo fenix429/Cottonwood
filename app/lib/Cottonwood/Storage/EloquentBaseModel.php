@@ -1,12 +1,12 @@
 <?php
 
-namespace Models;
+namespace Cottonwood\Storage;
 
 use Eloquent;
 use Validator;
 use Illuminate\Support\MessageBag;
 
-class BaseModel extends Eloquent
+class EloquentBaseModel extends Eloquent
 {
 	public static $rules = array();
 	protected $_errors = NULL;
@@ -15,12 +15,12 @@ class BaseModel extends Eloquent
 	{
 	    $rules = static::$rules;
 	    
-        // exclude the current user id from 'unqiue' validators
+	    // exclude the current user id from 'unqiue' validators
         if ($this->id > 0) {
             array_walk($rules, function(&$rule)
             {
-                // for this to work the unique rule must be last and must have the table listed
-                if (preg_match("/unique,[\w+],[\w+]$/i", $rule)) {
+                // for this to work the unique rule must be last and must have the table and column listed
+                if (preg_match("/unique:(\w+),(\w+)$/i", $rule)) {
                     $rule .= "," . $this->id;
                 }
             });

@@ -1,10 +1,10 @@
 <?php
 
-class FeedEloquentModelTest extends TestCase {
+class EloquentFeedModelTest extends TestCase {
 
 	public function testDataValidation()
 	{
-        $feed = FactoryMuff::create("Models\Feed");
+        $feed = FactoryMuff::create("Cottonwood\Storage\Feed\EloquentFeedModel");
         
         $this->assertTrue($feed->validate(), "The validate() method should return true with valid data.");
         

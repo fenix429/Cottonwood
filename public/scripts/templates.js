@@ -1,6 +1,10 @@
 
 define(["jquery", "handlebars"], function($, Handlebars){
 	
+    Handlebars.registerHelper('unless_blank', function(item, block) {
+        return (item && item.replace(/\s/g,"").length) ? block.fn(this) : block.inverse(this);
+    });
+	
 	// adjust oversized images in feeds
 	// TODO: rework for responsive layout - enquire.js?
     Handlebars.registerHelper('prepImages', function(html) {

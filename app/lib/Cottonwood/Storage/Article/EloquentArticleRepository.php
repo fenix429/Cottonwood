@@ -2,8 +2,8 @@
 
 namespace Cottonwood\Storage\Article;
 
-use Models\Article;
-use Models\Feed;
+use Cottonwood\Storage\Article\EloquentArticleModel as ArticleModel;
+use Cottonwood\Storage\Feed\EloquentFeedModel as FeedModel;
 
 class EloquentArticleRepository implements ArticleRepository
 {
@@ -15,7 +15,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function find($id)
     {
-        return Article::findOrFail($id);
+        return ArticleModel::findOrFail($id);
     }
     
     /**
@@ -25,7 +25,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function findAll()
     {
-        return Article::all()->orderBy('timestamp', 'desc')->get();
+        return ArticleModel::all()->orderBy('timestamp', 'desc')->get();
     }
     
     /**
@@ -36,7 +36,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function findByFeed($feedId)
     {
-        return Article::where('feed_id', $feedId)->where('unread', TRUE)->orderBy('timestamp', 'desc')->get();
+        return ArticleModel::where('feed_id', $feedId)->where('unread', TRUE)->orderBy('timestamp', 'desc')->get();
     }
     
     /**
@@ -48,8 +48,8 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function create($feedId, $input)
     {
-        $feed = Feed::findOrFail($feedId);
-        $article = new Article($input);
+        $feed = FeedModel::findOrFail($feedId);
+        $article = new ArticleModel($input);
         
         $feed->articles()->save($article);
         
@@ -65,7 +65,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function update($id, $input)
     {
-        $article = Article::findOrFail($id);
+        $article = ArticleModel::findOrFail($id);
         $article->fill($input);
         $article->save();
         
@@ -80,7 +80,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function destroy($id)
     {
-        Article::destroy($id);
+        ArticleModel::destroy($id);
     }
     
     /**
@@ -91,7 +91,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function checkArticleExists($hash)
     {
-        return (bool) Article::where("hash", $hash)->count();
+        return (ArticleModel::where("hash", $hash)->count() > 0)? TRUE : FALSE;
     }
     
     /**
@@ -103,7 +103,7 @@ class EloquentArticleRepository implements ArticleRepository
 	 */
     public function prune($age, $unread)
     {
-        $articles = Article::where("timestamp", "<", $age);
+        $articles = ArticleModel::where("timestamp", "<", $age);
         
         // if $unread = TRUE then unread articles will also be deleted
         if (!$unread) {

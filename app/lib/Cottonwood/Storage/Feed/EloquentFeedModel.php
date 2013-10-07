@@ -1,9 +1,13 @@
 <?php
 
-namespace Models;
+namespace Cottonwood\Storage\Feed;
 
-class Feed extends BaseModel
+use Cottonwood\Storage\EloquentBaseModel;
+
+class EloquentFeedModel extends EloquentBaseModel
 {
+    protected $table = "feeds";
+    
 	protected $guarded = array("id");
 
 	public static $rules = array(
@@ -18,6 +22,6 @@ class Feed extends BaseModel
 	
     public function articles()
     {
-        return $this->hasMany("Models\Article");
+        return $this->hasMany("Cottonwood\Storage\Article\EloquentArticleModel", "feed_id");
     }
 }

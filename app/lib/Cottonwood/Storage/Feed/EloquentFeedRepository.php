@@ -2,7 +2,7 @@
 
 namespace Cottonwood\Storage\Feed;
 
-use Models\Feed;
+use Cottonwood\Storage\Feed\EloquentFeedModel as FeedModel;
 
 class EloquentFeedRepository implements FeedRepository
 {
@@ -14,7 +14,7 @@ class EloquentFeedRepository implements FeedRepository
 	 */
     public function find($id)
     {
-        return Feed::findOrFail($id);
+        return EloquentFeedModel::findOrFail($id);
     }
     
     /**
@@ -24,7 +24,7 @@ class EloquentFeedRepository implements FeedRepository
 	 */
     public function findAll()
     {
-        return Feed::all();
+        return FeedModel::all();
     }
     
     /**
@@ -46,7 +46,7 @@ class EloquentFeedRepository implements FeedRepository
 	 */
     public function create($input)
     {
-        return Feed::create($input);
+        return FeedModel::create($input);
     }
     
     /**
@@ -58,7 +58,7 @@ class EloquentFeedRepository implements FeedRepository
 	 */
     public function update($id, $input)
     {
-        $feed = Feed::find($id);
+        $feed = FeedModel::find($id);
 		$feed->fill($input);
 		$feed->save();
 		
@@ -73,6 +73,6 @@ class EloquentFeedRepository implements FeedRepository
 	 */
     public function destroy($id)
     {
-        Feed::destroy($id);
+        FeedModel::destroy($id);
     }
 }
