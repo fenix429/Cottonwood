@@ -119,6 +119,7 @@ return array(
 		'Mews\Purifier\PurifierServiceProvider',
 		'Cottonwood\Support\ServiceProviders\FeedBuilderServiceProvider',
 		'Cottonwood\Support\ServiceProviders\StorageServiceProvider',
+		'Cottonwood\Support\ServiceProviders\MessageServiceProvider',
 
 	),
 
