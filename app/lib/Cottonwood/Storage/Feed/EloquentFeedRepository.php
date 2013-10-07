@@ -1,5 +1,13 @@
 <?php 
 
+/****
+ * TODO:
+ *  - User association (findByUser||findByUserId??)
+ *  - CreateOrAssociate (with user)
+ *  - RemoveAssociation (with user, and delete if no users left)
+ *  - Better error handling on create and update
+ */
+
 namespace Cottonwood\Storage\Feed;
 
 use Cottonwood\Storage\Feed\EloquentFeedModel as FeedModel;
@@ -46,7 +54,13 @@ class EloquentFeedRepository implements FeedRepository
 	 */
     public function create($input)
     {
-        return FeedModel::create($input);
+        $feed = new FeedModel($input);
+        
+        if (!$feed->save()) {
+            throw new \Exception($feed->errors()->toJson());
+        }
+        
+        return $feed;
     }
     
     /**
@@ -60,8 +74,11 @@ class EloquentFeedRepository implements FeedRepository
     {
         $feed = FeedModel::find($id);
 		$feed->fill($input);
-		$feed->save();
 		
+        if (!$feed->save()) {
+            throw new \Exception($feed->errors()->toJson());
+        }
+        
 		return $feed;
     }
     

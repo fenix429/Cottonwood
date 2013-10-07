@@ -1,5 +1,10 @@
 <?php 
 
+/****
+ * TODO:
+ *  - Better error handling on create and update
+ */
+
 namespace Cottonwood\Storage\Article;
 
 use Cottonwood\Storage\Article\EloquentArticleModel as ArticleModel;
@@ -51,7 +56,9 @@ class EloquentArticleRepository implements ArticleRepository
         $feed = FeedModel::findOrFail($feedId);
         $article = new ArticleModel($input);
         
-        $feed->articles()->save($article);
+        if (!$feed->articles()->save($article)) {
+            throw new \Exception($article->errors()->toJson());
+        }
         
         return $article;
     }
@@ -67,7 +74,10 @@ class EloquentArticleRepository implements ArticleRepository
     {
         $article = ArticleModel::findOrFail($id);
         $article->fill($input);
-        $article->save();
+        
+        if (!$article->save($article)) {
+            throw new \Exception($article->errors()->toJson());
+        }
         
         return $article;
     }
