@@ -1,11 +1,12 @@
 <?php
 
-namespace Cottonwood\Feed;
- 
+namespace Cottonwood\Support\ServiceProviders;
+
 use Illuminate\Support\ServiceProvider;
+use Cottonwood\Feed\FeedBuilder;
 use App;
  
-class FeedServiceProvider extends ServiceProvider
+class FeedBuilderServiceProvider extends ServiceProvider
 {
 
     public function register()

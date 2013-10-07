@@ -1,10 +1,12 @@
 <?php
 
-namespace Cottonwood\Storage;
+namespace Cottonwood\Support\ServiceProviders;
  
 use Illuminate\Support\ServiceProvider;
+use Cottonwood\Storage\Article\EloquentArticleRepository;
+use Cottonwood\Storage\Feed\EloquentFeedRepository;
 use App;
- 
+
 class StorageServiceProvider extends ServiceProvider
 {
 
@@ -17,12 +19,12 @@ class StorageServiceProvider extends ServiceProvider
         // Bind App::make shortcuts
         App::bind('FeedRepository', function()
         {
-            return new Feed\EloquentFeedRepository();
+            return new EloquentFeedRepository();
         });
         
         App::bind('ArticleRepository', function()
         {
-            return new Article\EloquentArticleRepository();
+            return new EloquentArticleRepository();
         });
     }
  
