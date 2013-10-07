@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration {
 			$table->string("title");
 			$table->string("link");
 			$table->text("summary");
-			$table->text("content");
+			$table->text("content")->nullable();
 			$table->string("hash")->unique();
 			$table->integer("timestamp");
 			$table->boolean("unread")->default(TRUE);
