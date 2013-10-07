@@ -4,5 +4,5 @@ namespace Cottonwood\Message;
 
 interface MessagePublisher
 {
-    public function send($room, $data);
+    public function send($room, $evt, $data);
 }

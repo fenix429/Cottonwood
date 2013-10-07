@@ -23,7 +23,7 @@ define([
 		});
 		
 		this.socket.on("newArticle", function(data){
-		    Dispatch.trigger("article:add", data.data);
+		    Dispatch.trigger("article:add", data);
 		});
 	};
 	

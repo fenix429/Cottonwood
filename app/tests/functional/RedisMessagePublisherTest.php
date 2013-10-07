@@ -35,8 +35,9 @@ class RedisMessagePublisherTest extends TestCase
 	public function testSend()
 	{
     	$room = "test-room";
+    	$evt = "test-event";
     	$data = ["one" => 1, "two" => 2, "three" => 3, "four" => 4];
-    	$message = json_encode(["room" => $room, "data" => $data]);
+    	$message = json_encode(["room" => $room, "event" => $evt, "data" => $data]);
     	$config = ["host" => "127.0.0.1", "port" => 6379, "channel" => "messages-test"];
 	    
         $mock = Mockery::mock("Redis", ["connect" => TRUE]);
@@ -44,7 +45,7 @@ class RedisMessagePublisherTest extends TestCase
         
         $publisher = new MessagePublisher($config, $mock);
         
-        $publisher->send($room, $data);
+        $publisher->send($room, $evt, $data);
 	}
 
 }

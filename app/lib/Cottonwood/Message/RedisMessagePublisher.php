@@ -22,15 +22,15 @@ class RedisMessagePublisher implements MessagePublisher
         }
     }
     
-    public function send($room, $data)
+    public function send($room, $evt, $data)
     {
-        $message = $this->_buildMessage($room, $data);
+        $message = $this->_buildMessage($room, $evt, $data);
         
         $this->_redis->publish($this->_settings["channel"], $message);
     }
     
-    private function _buildMessage($room, $data)
+    private function _buildMessage($room, $evt, $data)
     {
-        return json_encode(["room" => $room, "data" => $data]);
+        return json_encode(["room" => $room, "event" => $evt, "data" => $data]);
     }
 }
