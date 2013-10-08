@@ -109,6 +109,22 @@ class FeedLibrarySupportClassesTest extends TestCase
         
         $this->assertEquals('myDiv', $firstElement->getAttr('id'), 'The node attributes should be parsed correctly.');
     }
+    
+    /**
+     * @expectedException Cottonwood\Support\Exceptions\DomParseException
+     * @expectedExceptionMessage Cannot create Element from from Non-Element Node.
+     */
+    public function testElementFactoryException()
+    {
+        $fragment = "<div>Mary had a little lamb, It's fleece was white as snow.</div>";
+        
+        $doc = new DomDocument();
+        
+        $doc->loadXML($fragment);
+        $textNode = $doc->getElementsByTagName("div")->item(0)->firstChild;
+        
+        Element::createFromDomNode($textNode);
+    }
 }
 
 

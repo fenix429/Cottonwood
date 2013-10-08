@@ -2,7 +2,8 @@
 
 namespace Cottonwood\Feed\Support;
 
-use \DomNode;
+use DomNode;
+use Cottonwood\Support\Exceptions\DomParseException;
 
 class Element
 {
@@ -21,7 +22,7 @@ class Element
     public static function createFromDomNode(DomNode $node)
     {
         if ($node->nodeType != XML_ELEMENT_NODE) {
-            throw new \Exception("Cannot create Element from from Non-Element Node.");
+            throw new DomParseException("Cannot create Element from from Non-Element Node.");
         }
         
         $name = $node->nodeName;
