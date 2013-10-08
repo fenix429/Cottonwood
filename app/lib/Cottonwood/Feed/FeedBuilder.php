@@ -2,8 +2,8 @@
 
 namespace Cottonwood\Feed;
 
-use \DomDocument;
-use \Exception;
+use DomDocument;
+use Cottonwood\Support\Exceptions\FileReadException;
 
 class FeedBuilder
 {
@@ -18,7 +18,7 @@ class FeedBuilder
         $src = @file_get_contents($loc);
         
         if ($src === FALSE) {
-            throw new Exception("Could not open resource.");
+            throw new FileReadException("Could not open resource.");
         }
         
         $dom = new DomDocument();

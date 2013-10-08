@@ -2,6 +2,8 @@
 
 namespace Cottonwood\Message;
 
+use Cottonwood\Support\Exceptions\ConnectionException;
+
 class RedisMessagePublisher implements MessagePublisher
 {
     private $_redis = NULL;
@@ -18,7 +20,7 @@ class RedisMessagePublisher implements MessagePublisher
         
         // attempt to connect
         if (!$this->_redis->connect($this->_settings["host"], $this->_settings["port"])) {
-            throw new \Exception("Could not establish a connection to Redis");
+            throw new ConnectionException("Could not establish a connection to Redis");
         }
     }
     

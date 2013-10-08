@@ -6,6 +6,7 @@ use \DateTime;
 use \DomDocument;
 use Cottonwood\Feed\Support\Article;
 use Cottonwood\Feed\Support\Element;
+use Cottonwood\Support\Exceptions\DomParseException;
 
 class AtomDocument implements FeedDocument
 {
@@ -45,31 +46,33 @@ class AtomDocument implements FeedDocument
             
             foreach ($entry->childNodes as $child)
             {
-                if ($child->nodeName == "#text" && trim($child->nodeValue) == "") {
-                    continue; // skip blank whitespace
-                }
-                
-                $element = Element::createFromDomNode($child);
-                
-                switch ($element->name) {
-                    case "title":
-                        $title = $element->value;
-                        break;
-                    case "link":
-                        $link = $element->getAttr('href');
-                        break;
-                    case "summary":
-                        $summary = $element->value;
-                        break;
-                    case "content":
-                        $content = $element->value;
-                        break;
-                    case "published": // entry should have a published element
-                    case "updated": // entry might have an updated element
-                        $published = DateTime::createFromFormat(DateTime::ATOM, $element->value);
-                        break;
-                    default:
-                        array_push($item_meta, $element);
+                try {
+                    
+                    $element = Element::createFromDomNode($child);
+                    
+                    switch ($element->name) {
+                        case "title":
+                            $title = $element->value;
+                            break;
+                        case "link":
+                            $link = $element->getAttr('href');
+                            break;
+                        case "summary":
+                            $summary = $element->value;
+                            break;
+                        case "content":
+                            $content = $element->value;
+                            break;
+                        case "published": // entry should have a published element
+                        case "updated": // entry might have an updated element
+                            $published = DateTime::createFromFormat(DateTime::ATOM, $element->value);
+                            break;
+                        default:
+                            array_push($item_meta, $element);
+                    }
+                    
+                } catch (DomParseException $ex) {
+                    // not an element node
                 }
             }
             

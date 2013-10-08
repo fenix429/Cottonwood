@@ -20,7 +20,7 @@ class RedisMessagePublisherTest extends TestCase
 	}
 	
 	/**
-     * @expectedException Exception
+     * @expectedException Cottonwood\Support\Exceptions\ConnectionException
      * @expectedExceptionMessage Could not establish a connection to Redis
      */
 	public function testConstructorException()

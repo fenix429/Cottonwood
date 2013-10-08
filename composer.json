@@ -6,7 +6,8 @@
     "require": {
         "laravel/framework": "dev-master",
         "way/generators": "dev-master",
-        "mews/purifier": "dev-master"
+        "mews/purifier": "dev-master",
+        "pda/pheanstalk": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "dev-master",

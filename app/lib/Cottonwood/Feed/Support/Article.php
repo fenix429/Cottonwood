@@ -2,7 +2,7 @@
 
 namespace Cottonwood\Feed\Support;
 
-use \DateTime;
+use DateTime;
 use Mews\Purifier\Purifier;
 
 class Article
