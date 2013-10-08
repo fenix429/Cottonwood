@@ -13,7 +13,7 @@ class FeedLibraryTest extends TestCase
     }
     
     /**
-     * @expectedException Exception
+     * @expectedException Cottonwood\Support\Exceptions\FileReadException
      * @expectedExceptionMessage Could not open resource.
      */
     public function testCreateFromFileInvalidLocation()
