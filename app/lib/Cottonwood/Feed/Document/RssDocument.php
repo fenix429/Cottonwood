@@ -13,6 +13,7 @@ use DateTime;
 use DomDocument;
 use Cottonwood\Feed\Support\Article;
 use Cottonwood\Feed\Support\Element;
+use Cottonwood\Support\Exceptions\DomParseException;
 
 class RssDocument implements FeedDocument
 {
@@ -52,30 +53,32 @@ class RssDocument implements FeedDocument
             
             foreach ($item->childNodes as $child)
             {
-                if ($child->nodeName == "#text" && trim($child->nodeValue) == "") {
-                    continue; // skip blank whitespace
-                }
-                
-                $element = Element::createFromDomNode($child);
-                
-                switch ($element->name) {
-                    case "title":
-                        $title = $element->value;
-                        break;
-                    case "link":
-                        $link = $element->value;
-                        break;
-                    case "description":
-                        $summary = $element->value;
-                        break;
-                    case "content:encoded":
-                        $content = $element->value;
-                        break;
-                    case "pubDate":
-                        $published = DateTime::createFromFormat(DateTime::RSS, $element->value);
-                        break;
-                    default:
-                        array_push($item_meta, $element);
+                try {
+                    
+                    $element = Element::createFromDomNode($child);
+                    
+                    switch ($element->name) {
+                        case "title":
+                            $title = $element->value;
+                            break;
+                        case "link":
+                            $link = $element->value;
+                            break;
+                        case "description":
+                            $summary = $element->value;
+                            break;
+                        case "content:encoded":
+                            $content = $element->value;
+                            break;
+                        case "pubDate":
+                            $published = DateTime::createFromFormat(DateTime::RSS, $element->value);
+                            break;
+                        default:
+                            array_push($item_meta, $element);
+                    }
+                    
+                } catch (DomParseException $ex) {
+                    // not an element node
                 }
             }
             
